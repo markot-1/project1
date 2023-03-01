@@ -1,12 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+    <script>
+        // Поиск элекментов
+        // 1. Как найти: таблицу с id="age-table".
+        let table = document.getElementById('age-table');
+        document.querySelector("#age-table");
+
+        // 2. Как найти: Все элементы label внутри этой таблицы (их три).
+        table.querySelectorAll('label');
+        table.getElementsByTagName('label');
+        document.querySelectorAll('#age-table label')
+
+        // 3. Как найти: Первый td в этой таблице (со словом «Age»).
+        table.querySelector('td');
+        table.getElementsByTagName('td')[0];
+        table.rows[0].cells[0];
+
+        // 4. Как найти: Форму form с именем name="search".
+
+        document.querySelector('form[name="search"]');
+        document.getElementsByName('search')[0];
+
+        // 5. Как найти: Первый input в этой форме.
+        let form = document.querySelector('form[name="search"]');
+
+        form.getElementsByTagName('input')[0];
+        form.querySelector('input');
+
+        // 6. Как найти: Последний input в этой форме.
+        let inputs = form.querySelectorAll('input');
+        inputs[inputs.length - 1];
+    </script>
 </body>
+
 </html>
