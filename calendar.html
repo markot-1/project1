@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        table {
+            height: 20px;
+            width: 20px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            background: rgb(205, 204, 204);
+            border: 1px solid black;
+        }
+
+        td {
+            background: #f6f5f5;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="cal"></div>
+
+    <script>
+        createCalendar(document.getElementById('cal'), 2022, 10);
+
+        function createCalendar(elem, year, month) {
+            let table = document.createElement('table');
+            let tableWithHeader = createTableWithHeader(table);
+            let tbody = createTableBody(getStartNumberOfDay(year, month), getMaxDay(year, month));
+
+            tableWithHeader.append(tbody);
+
+            elem.append(tableWithHeader);
+        }
+
+        function createTableWithHeader(table) {
+            let thead = document.createElement('thead');
+            let titleRow = document.createElement('tr');
+
+            // add days to header
+            let days = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС'];
+            for (let i = 0; i < days.length; i++) {
+                let heading = document.createElement('th');
+                heading.innerHTML = days[i];
+                titleRow.append(heading);
+            }
+            thead.append(titleRow);
+            table.append(thead);
+            return table;
+        }
+
+        function createTableBody(startNumberOfDay, maxDay) {
+            let tbody = document.createElement('tbody');
+            let currentDay = 1;
+            let rowLength = 1;
+            for (let row = 1; row <= rowLength; row++) {
+                let tableRow = document.createElement('tr');
+                tbody.append(tableRow);
+
+                for (let i = 1; i <= 7; i++) {
+                    if (i == 7 && currentDay < maxDay) {
+                        rowLength++
+                    }
+
+                    cell = document.createElement('td');
+                    tableRow.append(cell);
+
+                    if (row == 1 && i < startNumberOfDay || currentDay > maxDay) {
+                        cell.innerHTML = ' ';
+                    } else {
+                        cell.innerHTML = currentDay;
+                        currentDay++;
+                    }
+                }
+            }
+            return tbody;
+        }
+
+        function getStartNumberOfDay(year, month) {
+            let date = new Date(year, month - 1).getDay();
+            if (date == 0) {
+                date = 7;
+            }
+            return date;
+        }
+
+        function getMaxDay(year, month) {
+            let maxDay = new Date(year, month, 0).getDate();
+            return maxDay;
+        }
+    </script>
+</body>
+
+</html>
